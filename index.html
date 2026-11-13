@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Happy 1-Year Anniversary, Syg ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(160deg, #fff5f7 0%, #ffe8ee 48%, #fdf2f5 100%);
+      --card-bg: #fffdf9;
+      --rose-primary: #e11d48;
+      --rose-soft: #fb7185;
+      --rose-blush: #ffe4e6;
+      --rose-border: #fecdd3;
+      --text-main: #3f282e;
+      --text-muted: #7f5a63;
+      --shadow-soft: 0 14px 36px rgba(225, 29, 72, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      line-height: 1.65;
+    }
+
+    /* Ambient floating hearts background */
+    .ambient-hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .ambient-heart {
+      position: absolute;
+      bottom: -30px;
+      color: rgba(244, 63, 94, 0.22);
+      animation: floatUp linear infinite;
+      user-select: none;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(0.9);
+        opacity: 0;
+      }
+      15% { opacity: 0.7; }
+      85% { opacity: 0.5; }
+      100% {
+        transform: translateY(-105vh) rotate(25deg) scale(1.15);
+        opacity: 0;
+      }
+    }
+
+    /* Tap-anywhere floating heart burst */
+    .tap-heart {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      font-size: 20px;
+      animation: popFloat 1.1s ease-out forwards;
+    }
+
+    @keyframes popFloat {
+      0% {
+        transform: translate(-50%, -50%) scale(0.4);
+        opacity: 1;
+      }
+      50% {
+        transform: translate(-50%, -120%) scale(1.2);
+        opacity: 0.9;
+      }
+      100% {
+        transform: translate(-50%, -210%) scale(0.85);
+        opacity: 0;
+      }
+    }
+
+    /* Main Container */
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 540px;
+      margin: 0 auto;
+      padding: 20px 16px 64px;
+    }
+
+    /* ENVELOPE INTRO SCREEN */
+    #envelope-screen {
+      min-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 16px;
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    #envelope-screen.fade-out {
+      opacity: 0;
+      transform: translateY(-20px) scale(0.96);
+      pointer-events: none;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--rose-border);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--rose-primary);
+      margin-bottom: 18px;
+      box-shadow: 0 4px 12px rgba(225, 29, 72, 0.08);
+    }
+
+    .intro-title {
+      font-family: 'Caveat', cursive;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--rose-primary);
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .intro-subtitle {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+      max-width: 300px;
+    }
+
+    .envelope-wrapper {
+      position: relative;
+      width: 290px;
+      height: 195px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      margin-bottom: 24px;
+    }
+
+    .envelope-wrapper:active {
+      transform: scale(0.96);
+    }
+
+    .envelope-body {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(145deg, #ffe4e6, #fecdd3);
+      border-radius: 16px;
+      box-shadow: 0 18px 35px rgba(225, 29, 72, 0.18);
+      overflow: hidden;
+      border: 1.5px solid #fda4af;
+    }
+
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 105px;
+      background: linear-gradient(180deg, #fda4af 0%, #fb7185 100%);
+      clip-path: polygon(0 0, 50% 92%, 100% 0);
+      transform-origin: top center;
+      transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 3;
+    }
+
+    .envelope-wrapper.open .envelope-flap {
+      transform: rotateX(180deg);
+    }
+
+    .envelope-pocket-left {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.35);
+      clip-path: polygon(0 0, 52% 55%, 0 100%);
+      z-index: 2;
+    }
+
+    .envelope-pocket-right {
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.25);
+      clip-path: polygon(100% 0, 48% 55%, 100% 100%);
+      z-index: 2;
+    }
+
+    .envelope-pocket-bottom {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, #ffe4e6 0%, #fff1f2 100%);
+      clip-path: polygon(0 100%, 50% 48%, 100% 100%);
+      z-index: 2;
+    }
+
+    .wax-seal {
+      position: absolute;
+      top: 52%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 62px;
+      height: 62px;
+      background: radial-gradient(circle at 30% 30%, #f43f5e, #be123c);
+      border-radius: 50%;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.55rem;
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(190, 18, 60, 0.45), inset 0 2px 4px rgba(255, 255, 255, 0.35);
+      border: 2px dashed rgba(255, 255, 255, 0.45);
+      animation: pulseSeal 2s infinite;
+    }
+
+    @keyframes pulseSeal {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.08); }
+    }
+
+    .tap-hint {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--rose-primary);
+      letter-spacing: 0.02em;
+      animation: bounceHint 1.8s infinite;
+    }
+
+    @keyframes bounceHint {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    /* MAIN LETTER CONTENT */
+    #main-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    #main-content.visible {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .header-banner {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .header-banner h1 {
+      font-family: 'Caveat', cursive;
+      font-size: 2.4rem;
+      color: var(--rose-primary);
+      line-height: 1.15;
+      margin-top: 6px;
+    }
+
+    .header-banner p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Letter Paper Card */
+    .letter-card {
+      background: var(--card-bg);
+      border-radius: 22px;
+      padding: 26px 22px;
+      box-shadow: var(--shadow-soft);
+      border: 1px solid var(--rose-border);
+      position: relative;
+      margin-bottom: 28px;
+      background-image: radial-gradient(rgba(244, 63, 94, 0.05) 1px, transparent 0);
+      background-size: 20px 20px;
+    }
+
+    .letter-greeting {
+      font-family: 'Caveat', cursive;
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--rose-primary);
+      margin-bottom: 16px;
+    }
+
+    .letter-body p {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 0.98rem;
+      line-height: 1.82;
+      color: var(--text-main);
+      margin-bottom: 16px;
+    }
+
+    .letter-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .letter-signoff {
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--rose-border);
+      font-family: 'Caveat', cursive;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--rose-primary);
+      text-align: right;
+    }
+
+    /* Section Headings */
+    .section-header {
+      text-align: center;
+      margin: 30px 0 16px;
+    }
+
+    .section-header h2 {
+      font-family: 'Caveat', cursive;
+      font-size: 2rem;
+      color: var(--rose-primary);
+      line-height: 1.2;
+    }
+
+    .section-header p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    /* 365 Days Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .stat-box {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid var(--rose-border);
+      border-radius: 16px;
+      padding: 14px 8px;
+      text-align: center;
+      box-shadow: 0 6px 16px rgba(225, 29, 72, 0.06);
+    }
+
+    .stat-num {
+      font-family: 'Caveat', cursive;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--rose-primary);
+      line-height: 1.1;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* SINGLE POLAROID PHOTO FRAME (PORTRAIT OPTIMIZED) */
+    .single-photo-wrap {
+      max-width: 340px;
+      margin: 0 auto 32px;
+    }
+
+    .polaroid-card {
+      background: #ffffff;
+      padding: 14px 14px 20px;
+      border-radius: 16px;
+      box-shadow: 0 14px 32px rgba(225, 29, 72, 0.14);
+      border: 1px solid var(--rose-border);
+      transform: rotate(-1deg);
+      transition: transform 0.3s ease;
+    }
+
+    .polaroid-card:active {
+      transform: rotate(0deg) scale(0.98);
+    }
+
+    .polaroid-img-wrap {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #ffe4e6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .polaroid-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    .polaroid-caption {
+      font-family: 'Caveat', cursive;
+      font-size: 1.55rem;
+      font-weight: 600;
+      color: var(--rose-primary);
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    /* Flip Cards: Why My Heart Always Chooses You */
+    .reasons-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      margin-bottom: 30px;
+    }
+
+    .flip-card {
+      perspective: 1000px;
+      cursor: pointer;
+      min-height: 148px;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: 148px;
+      transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-front,
+    .flip-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 18px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-shadow: 0 8px 22px rgba(225, 29, 72, 0.08);
+    }
+
+    .flip-front {
+      background: linear-gradient(135deg, #ffffff 0%, #fff1f2 100%);
+      border: 1.5px solid var(--rose-border);
+      align-items: center;
+      text-align: center;
+    }
+
+    .flip-icon {
+      font-size: 1.8rem;
+      margin-bottom: 6px;
+    }
+
+    .flip-front h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--rose-primary);
+    }
+
+    .flip-tap-label {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+      background: rgba(255, 228, 230, 0.75);
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    .flip-back {
+      background: linear-gradient(135deg, #e11d48 0%, #fb7185 100%);
+      color: #ffffff;
+      transform: rotateY(180deg);
+      text-align: center;
+      border: 1.5px solid #f43f5e;
+    }
+
+    .flip-back p {
+      font-family: 'Lora', serif;
+      font-size: 0.9rem;
+      line-height: 1.58;
+      color: #fff;
+    }
+
+    /* Celebration Button */
+    .celebrate-box {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--rose-border);
+      border-radius: 22px;
+      padding: 24px 18px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .celebrate-box p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .celebrate-btn {
+      width: 100%;
+      max-width: 310px;
+      background: linear-gradient(135deg, #e11d48, #f43f5e);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 15px 24px;
+      font-size: 1rem;
+      font-weight: 700;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(225, 29, 72, 0.32);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .celebrate-btn:active {
+      transform: scale(0.96);
+    }
+
+    .love-counter {
+      margin-top: 12px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--rose-primary);
+      min-height: 20px;
+    }
+
+    /* Confetti particles */
+    .confetti-piece {
+      position: fixed;
+      top: -20px;
+      z-index: 10000;
+      pointer-events: none;
+      animation: confettiFall linear forwards;
+    }
+
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(105vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    @media (min-width: 480px) {
+      .letter-card {
+        padding: 34px 30px;
+      }
+      .flip-card, .flip-card-inner {
+        min-height: 138px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating background hearts -->
+  <div class="ambient-hearts" id="ambientHearts"></div>
+
+  <div class="container">
+    <!-- STEP 1: WAX-SEALED ENVELOPE -->
+    <section id="envelope-screen">
+      <div class="badge-pill">✨ 365 Days of Us ✨</div>
+      <h1 class="intro-title">A Little Note For You, Syg</h1>
+      <p class="intro-subtitle">Tap the wax seal below to open your 1-year anniversary letter.</p>
+
+      <div class="envelope-wrapper" id="envelopeBtn" role="button" tabindex="0" aria-label="Open anniversary envelope">
+        <div class="envelope-body">
+          <div class="envelope-flap"></div>
+          <div class="envelope-pocket-left"></div>
+          <div class="envelope-pocket-right"></div>
+          <div class="envelope-pocket-bottom"></div>
+        </div>
+        <div class="wax-seal">❤️</div>
+      </div>
+
+      <div class="tap-hint">Tap the heart seal to open 💌</div>
+    </section>
+
+    <!-- STEP 2: FULL LOVE LETTER, SINGLE PHOTO & INTERACTIVE CARDS -->
+    <main id="main-content">
+      <header class="header-banner">
+        <div class="badge-pill">❤️ Happy 1st Anniversary ❤️</div>
+        <h1>One Whole Year With You</h1>
+        <p>Tap anywhere on the screen to send little hearts</p>
+      </header>
+
+      <!-- Full Love Letter -->
+      <article class="letter-card">
+        <div class="letter-greeting">To my fav person on earth, ❤️</div>
+
+        <div class="letter-body">
+          <p>
+            I honestly can’t believe it’s been a whole year since I got to know you. Looking back, I think we just clicked from the very beginning, and I guess that explains why I’ve fallen so crazy hard for you.
+          </p>
+          <p>
+            I still remember how I used to pray to God to protect me and my heart, guide me in the right direction and bring the right people into my life. And then, somehow, you came along. Little did I know that you would become someone so special to me and bring me a kind of happiness I never knew I could experience.
+          </p>
+          <p>
+            I swear, I’ve never been happier than I am when I’m with you. We may not have had the easiest journey, and we've definitely been through our fair share of ups and downs, but somehow, at the end of the day, my heart always finds its way back to you. No matter how hard I try to fight it, there's just something about you that I can't seem to walk away from.
+          </p>
+          <p>
+            You've been my light during some of my darkest moments. Even during times when I felt like my own world was falling apart, when even my family wasn't there for me, you were. And I don't think you'll ever truly understand how much that meant to me. I'll always be grateful for the love, comfort and happiness you've brought into my life.
+          </p>
+          <p>
+            Happy one-year anniversary, syg. ❤️ Here's to more years, more memories, more laughter and everything in between. I know we won't always get everything right, but I hope we continue choosing each other, learning from each other and growing together through it all.
+          </p>
+          <p>
+            I promise to stand by your side, to love you through the good and the bad, and to never stop trying for us. I hope this is only the beginning of many more anniversaries together.
+          </p>
+        </div>
+
+        <div class="letter-signoff">I love you so much, ma. Always. ❤️</div>
+      </article>
+
+      <!-- 365 Days Highlights -->
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="stat-num">365</div>
+          <div class="stat-label">Days Loving You</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">∞</div>
+          <div class="stat-label">Reasons to Smile</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">1</div>
+          <div class="stat-label">Forever Choice</div>
+        </div>
+      </div>
+
+      <!-- SINGLE FEATURED MEMORY PHOTO -->
+      <div class="section-header">
+        <h2>My Favourite Person ❤️</h2>
+        <p>365 days & forever to go</p>
+      </div>
+
+      <div class="single-photo-wrap">
+        <div class="polaroid-card">
+          <div class="polaroid-img-wrap">
+            <img src="photo1.jpeg" alt="Us Together" />
+          </div>
+          <div class="polaroid-caption">My happiest place is with you 🥰❤️</div>
+        </div>
+      </div>
+
+      <!-- Interactive Flip Cards -->
+      <div class="section-header">
+        <h2>Why My Heart Always Chooses You</h2>
+        <p>Tap each card to read what you mean to me 💌</p>
+      </div>
+
+      <div class="reasons-grid">
+        <!-- Card 1 -->
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-front">
+              <div class="flip-icon">🛡️</div>
+              <h3>I Always Feel Safe With You</h3>
+              <span class="flip-tap-label">Tap to flip ✨</span>
+            </div>
+            <div class="flip-back">
+              <p>
+                With you, I never have to hide my heart or pretend to be okay. Your presence calms my worries, protects my peace, and makes me feel completely safe just being myself.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-front">
+              <div class="flip-icon">☀️</div>
+              <h3>You Make Me the Happiest</h3>
+              <span class="flip-tap-label">Tap to flip ✨</span>
+            </div>
+            <div class="flip-back">
+              <p>
+                I honestly didn’t know I could ever be this happy until you came into my life. Even the simplest moments with you turn into my favourite memories.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-front">
+              <div class="flip-icon">🕯️</div>
+              <h3>You Stayed When My World Felt Empty</h3>
+              <span class="flip-tap-label">Tap to flip ✨</span>
+            </div>
+            <div class="flip-back">
+              <p>
+                When everything around me felt heavy and lonely, you never walked away. You held my hand through the dark and reminded me I was never alone.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="flip-card" onclick="this.classList.toggle('flipped')">
+          <div class="flip-card-inner">
+            <div class="flip-front">
+              <div class="flip-icon">🏡</div>
+              <h3>You’re My Home</h3>
+              <span class="flip-tap-label">Tap to flip ✨</span>
+            </div>
+            <div class="flip-back">
+              <p>
+                Home isn’t a place anymore, it’s wherever you are. No matter what happens in the world outside, coming back to you always feels like coming home.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Celebration Section -->
+      <div class="celebrate-box">
+        <p>Here’s to Year 1 and a lifetime of choosing each other, ma.</p>
+        <button class="celebrate-btn" id="celebrateBtn">Happy 1st Anniversary Syg ❤️</button>
+        <div class="love-counter" id="loveCounter"></div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // 1. Ambient floating background hearts
+    const ambientContainer = document.getElementById('ambientHearts');
+    const heartSymbols = ['❤️', '💖', '💕', '💗', '🌸'];
+
+    function createAmbientHeart() {
+      const heart = document.createElement('span');
+      heart.className = 'ambient-heart';
+      heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (14 + Math.random() * 14) + 'px';
+      const duration = 7 + Math.random() * 7;
+      heart.style.animationDuration = duration + 's';
+      ambientContainer.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, duration * 1000);
+    }
+
+    setInterval(createAmbientHeart, 850);
+
+    // 2. Gentle chime sound using Web Audio API when opening envelope
+    function playSoftChime() {
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        const ctx = new AudioCtx();
+        const notes = [523.25, 659.25, 783.99, 1046.50];
+        notes.forEach((freq, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.11);
+          gain.gain.setValueAtTime(0.001, ctx.currentTime + i * 0.11);
+          gain.gain.exponentialRampToValueAtTime(0.07, ctx.currentTime + i * 0.11 + 0.04);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + i * 0.11 + 0.75);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(ctx.currentTime + i * 0.11);
+          osc.stop(ctx.currentTime + i * 0.11 + 0.8);
+        });
+      } catch (e) {}
+    }
+
+    // 3. Open envelope interaction
+    const envelopeBtn = document.getElementById('envelopeBtn');
+    const envelopeScreen = document.getElementById('envelope-screen');
+    const mainContent = document.getElementById('main-content');
+
+    function openLetter() {
+      if (envelopeBtn.classList.contains('open')) return;
+      envelopeBtn.classList.add('open');
+      playSoftChime();
+      burstHeartsAndConfetti(28);
+
+      setTimeout(() => {
+        envelopeScreen.classList.add('fade-out');
+        setTimeout(() => {
+          envelopeScreen.style.display = 'none';
+          mainContent.classList.add('visible');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 600);
+      }, 650);
+    }
+
+    envelopeBtn.addEventListener('click', openLetter);
+    envelopeBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') openLetter();
+    });
+
+    // 4. Tap anywhere to pop a floating heart
+    document.addEventListener('pointerdown', (e) => {
+      const pop = document.createElement('span');
+      pop.className = 'tap-heart';
+      pop.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+      pop.style.left = e.clientX + 'px';
+      pop.style.top = e.clientY + 'px';
+      document.body.appendChild(pop);
+      setTimeout(() => pop.remove(), 1100);
+    });
+
+    // 5. Celebration button confetti & hearts burst
+    const celebrateBtn = document.getElementById('celebrateBtn');
+    const loveCounter = document.getElementById('loveCounter');
+    let celebrateCount = 0;
+
+    function burstHeartsAndConfetti(count = 45) {
+      const items = ['❤️', '💖', '💕', '✨', '🌹', '🥳'];
+      for (let i = 0; i < count; i++) {
+        const el = document.createElement('span');
+        el.className = 'confetti-piece';
+        el.textContent = items[Math.floor(Math.random() * items.length)];
+        el.style.left = Math.random() * 100 + 'vw';
+        el.style.fontSize = (16 + Math.random() * 14) + 'px';
+        const duration = 2.2 + Math.random() * 2;
+        el.style.animationDuration = duration + 's';
+        el.style.animationDelay = (Math.random() * 0.4) + 's';
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), (duration + 0.5) * 1000);
+      }
+    }
+
+    celebrateBtn.addEventListener('click', () => {
+      celebrateCount++;
+      playSoftChime();
+      burstHeartsAndConfetti(50);
+      loveCounter.textContent = `I love you ${celebrateCount === 1 ? 'forever & always' : `× ${celebrateCount} times more`} ❤️`;
+    });
+  </script>
+</body>
+</html>
